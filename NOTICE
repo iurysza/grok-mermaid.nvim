@@ -1,0 +1,8 @@
+nice-mermaid.nvim installs grok-mermaid as a separate npm dependency.
+
+grok-mermaid
+License: Apache-2.0
+Repository: https://github.com/xl0/grok-mermaid
+
+The dependency is not bundled in this repository. See bridge/package-lock.json
+for its pinned version and integrity checksum.

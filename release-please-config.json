@@ -1,0 +1,10 @@
+{
+  "packages": {
+    ".": {
+      "release-type": "simple",
+      "package-name": "nice-mermaid.nvim",
+      "include-component-in-tag": false,
+      "include-v-in-tag": true
+    }
+  }
+}

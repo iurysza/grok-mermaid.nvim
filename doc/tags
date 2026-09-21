@@ -1,0 +1,8 @@
+:Mermaid	nice-mermaid.txt	/*:Mermaid*
+grok-mermaid	nice-mermaid.txt	/*grok-mermaid*
+grok-mermaid-commands	nice-mermaid.txt	/*grok-mermaid-commands*
+grok-mermaid-health	nice-mermaid.txt	/*grok-mermaid-health*
+grok-mermaid-introduction	nice-mermaid.txt	/*grok-mermaid-introduction*
+grok-mermaid-license	nice-mermaid.txt	/*grok-mermaid-license*
+grok-mermaid-setup	nice-mermaid.txt	/*grok-mermaid-setup*
+nice-mermaid.nvim	nice-mermaid.txt	/*nice-mermaid.nvim*

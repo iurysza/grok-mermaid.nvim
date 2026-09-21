@@ -1,0 +1,82 @@
+*nice-mermaid.nvim* Render Mermaid diagrams as terminal Unicode art
+
+==============================================================================
+Contents                                                        *grok-mermaid*
+
+Introduction                                                    |grok-mermaid-introduction|
+Setup                                                           |grok-mermaid-setup|
+Commands                                                        |grok-mermaid-commands|
+Health                                                          |grok-mermaid-health|
+
+==============================================================================
+Introduction                                                    *grok-mermaid-introduction*
+
+Nice Mermaid renders fenced Mermaid blocks as Unicode terminal diagrams. It
+uses the grok-mermaid Node package. The rendered Markdown view is read-only.
+Use |:Mermaid| to switch back to the editable original buffer.
+
+Requirements:
+
+- Neovim 0.10 or newer
+- Node 18 or newer
+- Markdown Tree-sitter parser
+- npm dependencies installed in bridge/ with `npm ci --omit=dev`
+
+==============================================================================
+Setup                                                           *grok-mermaid-setup*
+
+Use Lazy.nvim:
+>
+  {
+    "iurysza/nice-mermaid.nvim",
+    ft = { "markdown" },
+    cmd = { "Mermaid" },
+    build = function(plugin)
+      vim.system({ "npm", "ci", "--omit=dev" }, {
+        cwd = plugin.dir .. "/bridge",
+      }):wait()
+    end,
+    opts = {},
+  }
+<
+
+Configure the plugin:
+>
+  require("nice_mermaid").setup({
+    auto_render = true,
+    filetypes = { "markdown", "markdown.mdx" },
+    node = "node",
+    bridge = nil,
+  })
+<
+
+`bridge` defaults to the bundled `bridge/render.mjs` file.
+
+==============================================================================
+Commands                                                        *grok-mermaid-commands*
+
+:Mermaid                                                        *:Mermaid*
+:Mermaid toggle
+        Toggle between rendered diagrams and editable Mermaid source.
+
+:Mermaid render
+        Refresh the rendered view.
+
+:Mermaid source
+        Switch to editable Mermaid source.
+
+:Mermaid clear
+        Alias for `:Mermaid source`.
+
+==============================================================================
+Health                                                          *grok-mermaid-health*
+
+:checkhealth nice_mermaid
+        Checks Neovim, Node, the bundled bridge, its npm dependency, and the
+        Markdown Tree-sitter parser.
+
+==============================================================================
+License                                                         *grok-mermaid-license*
+
+nice-mermaid.nvim is MIT licensed. It installs grok-mermaid as a separate
+Apache-2.0 npm dependency. See LICENSE and NOTICE.

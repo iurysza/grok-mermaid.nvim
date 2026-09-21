@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Neovim ${{ matrix.neovim }}, Node ${{ matrix.node }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        neovim: [v0.10.4, stable]
+        node: [18, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+          cache-dependency-path: bridge/package-lock.json
+      - uses: MunifTanjim/setup-neovim-action@v1
+        with:
+          tag: ${{ matrix.neovim }}
+      - run: cargo install stylua --version 2.1.0 --locked
+      - run: npm ci --omit=dev
+        working-directory: bridge
+      - run: make format-check
+      - run: make test
+      - run: nvim --headless --clean -u NONE "+helptags doc" "+qa!"
